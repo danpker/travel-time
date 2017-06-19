@@ -37,10 +37,26 @@ def load_config():
 
 def parse_route(route):
     leg = route.get('legs')[0]
-    print(leg.get('duration_in_traffic').get('text'))
+    duration = leg.get('duration').get('text')
+    duration_in_traffic = leg.get('duration_in_traffic').get('text')
+    print('{}|color={}'.format(duration_in_traffic, get_colour(duration, duration_in_traffic)))
     print('---')
     print(get_steps(leg))
     print('{} | image={}'.format(route.get('summary'), get_map(route)))
+
+
+def get_colour(duration, duration_in_traffic):
+    first = int(re.findall('\d+', duration)[0])
+    second = int(re.findall('\d+', duration_in_traffic)[0])
+
+    difference = second - first
+
+    if difference < 10:
+        return 'green'
+    elif difference >= 10 and difference <= 25:
+        return 'orange'
+    else:
+        return 'red'
 
 
 def get_steps(leg):
