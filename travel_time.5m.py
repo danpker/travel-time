@@ -14,7 +14,7 @@ TAG_RE = re.compile(r'<[^>]+>')
 
 
 def main():
-    url = 'https://maps.googleapis.com/maps/api/directions/json?origin={}&destination={}&key={}'.format(
+    url = 'https://maps.googleapis.com/maps/api/directions/json?origin={}&destination={}&mode=driving&departure_time=now&key={}'.format(
         START, DESTINATION, API_KEY)
     data = json.loads(requests.get(url).content)
     routes = data.get('routes')
@@ -37,7 +37,7 @@ def load_config():
 
 def parse_route(route):
     leg = route.get('legs')[0]
-    print(leg.get('duration').get('text'))
+    print(leg.get('duration_in_traffic').get('text'))
     print('---')
     print(get_steps(leg))
     print('{} | image={}'.format(route.get('summary'), get_map(route)))
