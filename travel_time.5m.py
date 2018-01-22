@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env LC_ALL=en_US.UTF-8 /usr/local/bin/python3
 
 import requests
 import json
@@ -43,7 +43,7 @@ def parse_route(route):
     print('{}|color={}'.format(
         duration_in_traffic, get_colour(duration, duration_in_traffic)))
     print('---')
-    print(get_steps(leg))
+    print(get_steps(leg).encode().decode())
     print('{} | image={}'.format(route.get('summary'), get_map(route)))
 
 
