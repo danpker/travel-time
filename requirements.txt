@@ -1,2 +1,4 @@
+dateparser==0.7.0
 flake8==3.5.0
+pytest==3.4.2
 requests==2.18.4
